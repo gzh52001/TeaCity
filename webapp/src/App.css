@@ -1,0 +1,33 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.navbar{
+    width: 100vw;
+    height: 50px;
+    position: fixed;
+    bottom: 0;
+}
+.navbar ul li{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.navbar ul li a{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #7f7f7f;
+}
+.navbar ul li a .iconfont{
+    font-size: 22px;
+}
+.navbar ul li a span{
+  font-size: 12px;
+}
+.active{
+  color: #ff3600!important;
+}
