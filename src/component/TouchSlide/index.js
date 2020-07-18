@@ -59,13 +59,13 @@ class TouchSlide extends React.Component{
                                 <div className="swiper-slide" key={item.img}>
                         <section>
                             <article>
-                                <img src={item.img}>
+                                <img alt='' src={item.img}>
                                 </img>
                             <p>{item.title}</p>
                             </article>
                             <aside>
                                <div>
-                                   <img src={item.personIcon}></img>
+                                   <img alt='' src={item.personIcon}></img>
                             <p>{item.personTitle}</p>
                                </div>
                                <div>
