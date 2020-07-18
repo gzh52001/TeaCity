@@ -1,0 +1,162 @@
+.AC_shopDe{
+    width: 100vw;
+    height: 100vh;
+    padding-bottom: 50px;
+}
+.AC_shopDe-scr{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+.AC_shopDeBox{
+    width: 100%;
+    height: 100%;
+}
+.AC_shopDe_banner{
+    width: 100vw;
+    height: 375px;
+}
+.AC_shopDe_banner img{
+    width: 100%;
+    height: 100%;
+}
+.AC_shopDe_title{
+    padding: 10px 65px 10px 10px;
+}
+.AC_shopDe_title h2{
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+}
+.AC_shopDe_price{
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.AC_shopDe_price p{
+    font-size: 14px;
+}
+.AC_shopDe_price p span{
+    color: #c00000
+}
+.AC_shopDe_cuxiao{
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.AC_shopDe_cuxiao article{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+.AC_shopDe_cuxiao article div{
+    display: flex;
+    margin-bottom: 5px;
+}
+.AC_shopDe_cuxiao article div p{
+    background-color: #c00000;
+    color: white;
+    border-radius: 5px;
+    width: 32px;
+    height: 17px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 17px;
+}
+.AC_shopDe_cuxiao article div span{
+    font-size: 12px;
+    margin-left: 15px;
+    color: #999999;
+}
+.AC_shopDe_server{
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    height: 61px;
+}
+.AC_shopDe_server aside p{
+    width: 30px;
+}
+.AC_shopDe_server article{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 20px;
+}
+.AC_shopDe_server article p{
+    width: 40%;
+    display: flex;
+    align-items: center;
+}
+.AC_shopDe_server article p span{
+    display: block;
+    width: 5px;
+    height: 5px;
+    background-color: #c00000;
+    border-radius: 100%;
+}
+.AC_shopDe_server article p em{
+    font-size: 12px;
+    font-style: normal;
+    color: #999999;
+    margin-left: 10px;
+}
+.AC_shopDe_count {
+    padding: 10px;
+    display: flex;
+}
+.AC_shopDe_count article{
+    margin-left: 20px;
+}
+.AC_shopDe_count article input{
+    height: 32px;
+    border: 0;
+    text-align: center;
+    font-size: 18px;
+}
+.AC_shopDe_count article input[type="button"]{
+    width: 32px;
+}
+.AC_shopDe_count article input[type="text"]{
+    width: 50px;
+}
+.AC_shopDe_buyBar{
+    width: 100vw;
+    height: 50px;
+    display: flex;
+    position: fixed;
+    bottom: 0px;
+    background-color: white;
+    z-index: 999;
+}
+.AC_shopDe_buyBar aside{
+    width: 35%;
+    display: flex;
+}
+.AC_shopDe_buyBar aside p{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #757575;
+}
+.AC_shopDe_buyBar aside p .iconfont{
+    font-size: 24px;
+}
+.AC_shopDe_buyBar aside p span{
+    font-size: 12px;
+}
+.AC_shopDe_buyBar article{
+    width: 65%;
+    display: flex;
+}
+.AC_shopDe_buyBar article button{
+    flex: 1;
+    color: white;
+    border: 0;
+}
+.AC_shopDe_buyBar article button:nth-of-type(1){
+    background-color: #ff3600;
+}
+.AC_shopDe_buyBar article button:nth-of-type(2){
+    background-color: #ff8766;
+}
