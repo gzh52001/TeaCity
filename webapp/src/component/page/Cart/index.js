@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderBar from '../../HeaderBar';
+// import HeaderBar from '../../HeaderBar';
 import './cart.css';
 
 class Cart extends React.Component {
@@ -8,16 +8,9 @@ class Cart extends React.Component {
         this.state = {
             editState:false,
             editTitle:'',
-            delBtnTitle:'',
-            countValue:'1'
+            delBtnTitle:''
         }
 
-    }
-
-    changeCount = (event)=>{
-        this.setState({
-            countValue: event.target.value
-        })
     }
 
     setVal=()=>{
@@ -46,15 +39,10 @@ class Cart extends React.Component {
         this.setVal();
     }
     render() {
-        const {countValue} = this.state;
         return (
             <div className="AC_cart">
                 <div className="AC_cartScr">
                     <div className="AC_cartBox">
-                        <div className="AC_cart_headerbar">
-                            <HeaderBar></HeaderBar>
-                        </div>
-
                         <div className="AC_cart_title">
                             <p>已满足满59包邮</p>
                         <span onClick={this.setEditState}>{this.state.editTitle}</span>
@@ -66,7 +54,7 @@ class Cart extends React.Component {
                                     <input type="checkbox"></input>
                                 </div>
                                 <div className="AC_cart_imgBox">
-                                    <img src="http://img3.zuipin.cn/zpfx/proimg/2017-11-24-16-46-43-5a17dc735bac596873.jpg?x-oss-process=image/resize,m_lfit,h_250,w_250"></img>
+                                    <img alt='' src="http://img3.zuipin.cn/zpfx/proimg/2017-11-24-16-46-43-5a17dc735bac596873.jpg?x-oss-process=image/resize,m_lfit,h_250,w_250"></img>
                                 </div>
                                 <div className="AC_cart_goodsContent">
                                     <aside>
@@ -90,7 +78,7 @@ class Cart extends React.Component {
                                     <input type="checkbox"></input>
                                 </div>
                                 <div className="AC_cart_imgBox">
-                                    <img src="http://img3.zuipin.cn/zpfx/proimg/2017-11-24-16-46-43-5a17dc735bac596873.jpg?x-oss-process=image/resize,m_lfit,h_250,w_250"></img>
+                                    <img alt='' src="http://img3.zuipin.cn/zpfx/proimg/2017-11-24-16-46-43-5a17dc735bac596873.jpg?x-oss-process=image/resize,m_lfit,h_250,w_250"></img>
                                 </div>
                                 <div className="AC_cart_goodsContent">
                                     <aside>
@@ -100,9 +88,7 @@ class Cart extends React.Component {
                                         <p><span>￥</span>100.00</p>
                                         <div className="AC_cart_buttonZu">
                                             <input type="button" value="-"></input>
-                                            <input type="text" value={countValue} ref={ele=>{
-                                                this.countValue = ele;
-                                            }} onChange={this.changeCount}></input>
+                                            <input type="text" defaultValue="1"></input>
                                             <input type="button" value="+"></input>
                                         </div>
                                     </article>

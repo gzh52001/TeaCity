@@ -11,11 +11,8 @@ class ShopDetailed extends React.Component {
             <div className="AC_shopDe">
                 <div className="AC_shopDe-scr">
                     <div className="AC_shopDeBox">
-                        <div className="AC_shopDe_header">
-                            <HeaderBar></HeaderBar>
-                        </div>
                         <div className="AC_shopDe_banner">
-                            <img src="http://img3.zuipin.cn/online_img/proimg/20200415174226_12825902394.jpg"></img>
+                            <img alt='' src="http://img3.zuipin.cn/online_img/proimg/20200415174226_12825902394.jpg"></img>
                         </div>
                         <div className="AC_shopDe_title">
                             <h2>【2020春茶】大与茶號 白茶 御苑玉芽 2020年 白毫银针 特级 500g（20121）</h2>

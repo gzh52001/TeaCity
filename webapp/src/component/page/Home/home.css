@@ -2,6 +2,7 @@
     width: 100%;
     height: 100vh;
     padding: 0 0 50px 0;
+    background: #fff;
 }
 .AC_home-scr{
     width: 100%;
@@ -13,20 +14,42 @@
     height: 100%;
 }
 
-.AC_home_header{
+.app .AC_home_header{
     width: 100vw;
-     height: 44px;
-     display: flex;
-     align-items: center;
-     padding: 0 10px;
-     background: url(http://img1.zuipin.cn/new_pc/zuipinfw/20200603fw/P_01.jpg) no-repeat;
-     background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    background: none;
+    background: url(http://img1.zuipin.cn/new_pc/zuipinfw/20200603fw/P_01.jpg) no-repeat;
+    background-size: 100% 100%;
 }
 
-.AC_home_header article{
+.AC_home .search{
+    width: 70vw;
+    height: 4vh;
+    margin-left: 22vw;
+    display: flex;
+    align-items: center;
+    background-color: #F0F0F0;
+    padding-left: 12px;
+    color: #ADADAD;
+    border-radius: 6px;
+  }
+  .AC_home .search i{
+    font-size: 18px;
+    margin-right: 4px;
+  }
+  .AC_home .search span{
+    font-size: 12px;
+  }
+
+/* .AC_home_header article{
     padding-left: 28%;
    flex: 1;
-}
+} */
+/* .am-search{
+    height: 30px;
+} */
 .AC_home_swiper{
     height: 175px;
 }
