@@ -8,7 +8,9 @@ import './index.css';
 const Router = process.env.NODE_ENV === 'production' ? BrowserRouter : HashRouter;
 ReactDOM.render(
   <Router>
-    <App />
+    {/* <React.StrictMode> */}
+      <App/>
+    {/* </React.StrictMode> */}
   </Router>,
   document.getElementById('root')
 );
