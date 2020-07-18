@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+html, body,#root,.app{
+  height: 100%;
+}
+.app{
+  position: relative;
+  background: #F4F4F4;
+  
+} 
+.app header{
+  position: fixed;
+  width: 100%;
+  height: 12vw;
+  z-index: 2;
+  background-color: #1B1B20;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+.app header span{
+  font-size: 16px;
+}
+.app .header_margin{
+  width: 100%;
+  height: 12vw;
+
+}
+.app header a{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 10px;
+  color: #fff;
+}
+
+
+.navbar {
+  z-index: 5 ;
+  background-color: #FAFAFA;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 12vw;
+}
+
+
+
+
+/* .con{
+  height: 90%;
+  padding: 0 0 100px 0;
+} */
+/* .app nav{
+  box-sizing: border-box;
+  padding: 0 35px;
+  height: 12vw;
+  width: 100%;
+  background-color: #FAFAFA;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  z-index: 2;
+  border-top: 1px solid #EBEBEB;
+}
+
+nav span{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color: #8D8D8D;
+}
+nav i{
+  font-size: 20px !important;
+} */
+
+
+
+
