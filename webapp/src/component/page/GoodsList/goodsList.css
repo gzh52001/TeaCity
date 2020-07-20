@@ -37,7 +37,8 @@
     top: 0;
 }
 .gdsListBox li h4{
-    font-size: 14px;
+    height: 40px;
+    font-size: 12px;
     color: #333;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -47,6 +48,10 @@
     line-height: 18px;
     margin-bottom: 10px;
 }
+.gdsListBox li p:nth-of-type(1){
+    font-size: 12px;
+    height: 28px;
+}
 .gdsListBox li p:nth-of-type(2){
     margin: 10px 0;
     font-size: 14px;
@@ -55,4 +60,10 @@
 .gdsListBox li p:nth-of-type(2) del{
     color: #999;
     margin-left: 5px;
+}
+.goodList h6{
+    font-size: 14px;
+    text-align: center;
+    color: #b6b6b6;
+    margin-top: 10px;
 }

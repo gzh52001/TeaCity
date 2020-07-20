@@ -4,7 +4,6 @@ import './login.css'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux';
 import userActions from './../../../store/actions/user'
-import request from './../../../utils/request'
 class Login extends Component{
     constructor(){
         super()
@@ -16,15 +15,7 @@ class Login extends Component{
             { title: '密码登录' }
           ]
     }
-    checkName = async (username)=>{
-        console.log("111")
-        let res = await request.get("/checkname",{username:username})
-        try{
-            console.group(res)
-        }catch(err){
-            console.log("err:"+err)
-        }
-    }
+
     render(){
         const {logout,getUserInfo} = this.props
         console.log(this.props)
