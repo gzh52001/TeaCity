@@ -43,8 +43,11 @@ class App extends Component {
         }
       ]
     }
-    
-  }     
+ 
+  }    
+  goto = ()=>{
+      this.props.history.go(-1);
+  } 
   render() {
     let path = this.props.location.pathname
     return (
@@ -53,20 +56,20 @@ class App extends Component {
             path=='/home'?'':
             <div className='header_margin'>
               <header>
-                  <a href={{javascript:"history.go(-1)"}}><i className={"iconfont icon-zuojiantou"}></i>返回</a>
+                  <a onClick={this.goto}><i className={"iconfont icon-zuojiantou"}></i>返回</a>
                   <span>{path=="/sort"?"商品分类":path=="/goodslist"?"商品列表":path=="/cart"?"购物车":path=="/mine"?"个人中心":path=="/login"?"登录/注册":"商品详情"}</span>
               </header>
             </div>
           }
           <Switch>
-                <Route path="/home" component={Home}></Route>
-                <Route path="/sort" component={Sort}></Route>
-                <Route path="/cart" component={Cart}></Route>
-                <Route path="/mine" component={Mine}></Route>
-                <Route path="/goodsList" component={GoodsList}></Route>
-                <Route path="/login" component={Login}></Route>
-                <Route path='/notfound' component={NotFound}></Route>
-                <Route path="/goods:id" component={ShopDetailed}></Route>
+                <Route path="/home" component={Home} exact></Route>
+                <Route path="/sort" component={Sort} exact></Route>
+                <Route path="/cart" component={Cart} exact></Route>
+                <Route path="/mine" component={Mine} exact></Route>
+                <Route path="/sort/goodsList/:id" component={GoodsList} exact></Route>
+                <Route path="/login" component={Login} exact></Route>
+                <Route path='/notfound' component={NotFound} exact></Route>
+                <Route path="/goods/:id" component={ShopDetailed} exact></Route>
                 <Redirect from='/' to='/home'></Redirect>
                 <Redirect to='/notfound'></Redirect>
           </Switch>

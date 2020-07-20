@@ -1,10 +1,29 @@
 import React from 'react';
-import HeaderBar from '../../HeaderBar';
-import './shopDetailed.css'
+import './shopDetailed.css';
+import {get,request} from '../../../utils/request';
 
 class ShopDetailed extends React.Component {
+    constructor(){
+        super();
+        this.state = {
+            id:0,
+            datalist:[]
+        }
+    }
     componentDidMount() {
-        console.log(this.props)
+        let id = this.props.match.params.id;
+        this.setState({
+            id:id
+        },async ()=>{
+            let getData = await get('/goods/goodsdetailById',{goodsId:this.state.id});
+            if(getData.flag){
+                this.setState({
+                    datalist:getData.data[0]
+                },()=>{
+                    console.log(this.state.datalist)
+                })
+            }
+        })
     }
     render() {
         return (
@@ -12,13 +31,13 @@ class ShopDetailed extends React.Component {
                 <div className="AC_shopDe-scr">
                     <div className="AC_shopDeBox">
                         <div className="AC_shopDe_banner">
-                            <img alt='' src="http://img3.zuipin.cn/online_img/proimg/20200415174226_12825902394.jpg"></img>
+                            <img alt='' src={this.state.datalist.goodsBigImg}></img>
                         </div>
                         <div className="AC_shopDe_title">
-                            <h2>【2020春茶】大与茶號 白茶 御苑玉芽 2020年 白毫银针 特级 500g（20121）</h2>
+                        <h2>{this.state.datalist.goodstitle}</h2>
                         </div>
                         <div className="AC_shopDe_price">
-                            <p>醉品价：<span>￥1980.00</span></p>
+                        <p>醉品价：<span>￥{this.state.datalist.goodsPrice}</span></p>
                         </div>
                         <div className="AC_shopDe_cuxiao">
                             <aside>

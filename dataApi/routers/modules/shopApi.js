@@ -1,6 +1,7 @@
 const express = require('express');
 
 const query = require('../../mysql');
+const { response } = require('express');
 
 const router = express.Router();
 
@@ -365,4 +366,128 @@ router.get('/persondesc',async (req,res)=>{
 
     res.send(inf);
 })
+
+// 查询分类列表
+router.get('/sort',async (req,res)=>{
+    let inf = {};
+    try{
+        let sql = `select * from teatitlecontent`;
+        let p = await query(sql);
+        if(p.length){
+            inf = {
+                code:200,
+                flag:true,
+                message:'查询成功',
+                data:p
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'查询失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            code:false,
+            message:err
+        }
+    }
+    res.send(inf);
+})
+
+// 根据分类ID查询对应的名称
+router.get('/sortId',async (req,res)=>{
+    let {titleId} = req.query;
+    let inf = {};
+    try{
+        let sql = `select title from teatitle where titleId = ${titleId}`;
+        let p = await query(sql);
+        if(p.length){
+            inf = {
+                code:200,
+                flag:true,
+                message:'查询成功',
+                data:p
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'查询失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            flag:false,
+            message:err
+        }
+    }
+    res.send(inf);
+})
+// 通过二级分类的ID查找对应的商品列表
+router.get('/goodsbyId', async(req,res)=>{
+    let {teatitlecontentId} = req.query;
+    let inf = {};
+    try{
+        let sql = `select * from teadetailed where teatitlecontentId = ${teatitlecontentId}`;
+        let p = await query(sql);
+        if(p.length){
+            inf = {
+                code:200,
+                flag:true,
+                message:'查询成功',
+                data:p
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'查询失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            flag:false,
+            message:err
+        }
+    }
+
+    res.send(inf);
+})
+
+// 根据商品ID查找对应的商品信息
+router.get('/goodsdetailById',async (req,res)=>{
+    let {goodsId} = req.query;
+    let inf = {};
+    try{
+        let sql = `select * from teadetailed where goodsId = ${goodsId}`;
+        let p = await query(sql);
+        if(p.length){
+            inf = {
+                code:200,
+                flag:true,
+                message:'查询成功',
+                data:p
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'查询失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            flag:false,
+            message:err
+        }
+    }
+    res.send(inf);
+})
+
 module.exports = router;

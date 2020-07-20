@@ -37,3 +37,22 @@
 .sort .am-grid.am-grid-square .am-grid-item .am-grid-item-inner-content .am-grid-icon{
     width: 45% !important;
 }
+.sub-content {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.sub-content li{
+    width: 33.3vw;
+    height: 115px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+.sub-content li img{
+    width: 55px;
+    height: 55px;
+}
