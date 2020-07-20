@@ -1,0 +1,39 @@
+.app header{
+  height: 8%;
+  background-color: #2D3A4B;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-bottom: 2px solid #ddd;
+}
+.app header h4{
+  font-weight: bold;
+  font-size: 24px;
+}
+.app header .state{
+  width: 90px;
+  position: absolute;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.app header .state img{
+  width: 36px;
+  border-radius: 100%;
+  border: 2px solid #ddd;
+}
+/* .app .contnent{
+  display: flex;
+  height: 92%;
+  width: 100%;
+} */
+.app .el-row{
+  height: 92%;
+}
+.app .el-col{
+ 
+  min-width: 120px;
+}

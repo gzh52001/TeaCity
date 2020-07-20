@@ -1,0 +1,7 @@
+ .el-form {
+    padding-left: 10px;
+    margin-top: 20px;
+}
+.el-form-item{
+    display: flex;
+}
