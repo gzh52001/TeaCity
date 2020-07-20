@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tabs, WhiteSpace } from 'antd-mobile';
-import { get, request } from '../../../utils/request';
+import { get } from '../../../utils/request';
 import './goodsList.css'
 //测试
 const arr = [];

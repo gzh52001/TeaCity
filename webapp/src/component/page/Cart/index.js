@@ -1,5 +1,6 @@
 import React from 'react';
 // import HeaderBar from '../../HeaderBar';
+import {withLogin} from '../../../utils/hoc';
 import './cart.css';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux';
@@ -120,6 +121,8 @@ class Cart extends React.Component {
         )
     }
 }
+
+Cart = withLogin(Cart);
 Cart = connect((state)=>({
     state:state
 }),(dispatch)=>bindActionCreators(cartActions,dispatch))(Cart)

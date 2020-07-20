@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import detailActions from './../../../store/actions/detail';
 import { change } from '../../../store/actions/cart';
 import {Toast} from 'antd-mobile'
-Toast.info('This is a toast tips !!!')
 class ShopDetailed extends React.Component {
     constructor(){
         super();
@@ -26,8 +25,6 @@ class ShopDetailed extends React.Component {
             if(getData.flag){
                 this.setState({
                     datalist:getData.data[0]
-                },()=>{
-                    console.log(this.state.datalist)
                 })
             }
         })
