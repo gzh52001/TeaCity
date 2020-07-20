@@ -1,5 +1,4 @@
 import React from 'react';
-import HeaderBar from '../../HeaderBar';
 import './shopDetailed.css'
 
 class ShopDetailed extends React.Component {

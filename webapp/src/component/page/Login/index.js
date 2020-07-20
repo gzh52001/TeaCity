@@ -1,18 +1,33 @@
 import React,{Component} from 'react';
 import { Tabs, WhiteSpace } from 'antd-mobile';
 import './login.css'
-  const tabs= [
-    { title: '注册账号' },
-    { title: '密码登录' }
-  ];
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux';
+import userActions from './../../../store/actions/user'
+import request from './../../../utils/request'
 class Login extends Component{
     constructor(){
         super()
         this.state= {
             data:""
         }
+        this.tabs = [
+            { title: '注册账号' },
+            { title: '密码登录' }
+          ]
+    }
+    checkName = async (username)=>{
+        console.log("111")
+        let res = await request.get("/checkname",{username:username})
+        try{
+            console.group(res)
+        }catch(err){
+            console.log("err:"+err)
+        }
     }
     render(){
+        const {logout,getUserInfo} = this.props
+        console.log(this.props)
         return(
             <div className='login-wrap'>
                 <img alt='' src='./img/V7_logo.png'/>
@@ -22,7 +37,7 @@ class Login extends Component{
                             activeTab="0"
                             tabBarActiveTextColor='#333'
                             tabBarUnderlineStyle={{transform: 'scaleX(.35) scaleY(.7)',borderColor:'red'}} 
-                            tabs={tabs} 
+                            tabs={this.tabs} 
                             initialPage={1} 
                             animated={false} 
                             useOnPan={false}>
@@ -33,7 +48,7 @@ class Login extends Component{
                                 <button>立即注册</button>
                             </div>
                             <div className='login' >
-                                <input type='text' id='username' placeholder='请输入账号'/>
+                                <input onBlur={this.checkName} type='text' id='username' placeholder='请输入账号'/>
                                 <input type='password' id='password' placeholder='请输入密码'/>
                                 <button>立即登录</button>
                             </div>
@@ -44,5 +59,8 @@ class Login extends Component{
         )
     }
 }
+Login = connect((state)=>({
+
+}),(dispatch)=>bindActionCreators(userActions,dispatch))(Login)
 
 export default Login;
