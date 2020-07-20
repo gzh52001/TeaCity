@@ -63,7 +63,7 @@ class App extends Component {
           }
           <Switch>
                 <Route path="/home" component={Home} exact></Route>
-                <Route path="/sort" component={Sort} exact></Route>
+                <Route path="/sort/" component={Sort} exact></Route>
                 <Route path="/cart" component={Cart} exact></Route>
                 <Route path="/mine" component={Mine} exact></Route>
                 <Route path="/sort/goodsList/:id" component={GoodsList} exact></Route>

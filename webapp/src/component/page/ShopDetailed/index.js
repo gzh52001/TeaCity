@@ -1,6 +1,6 @@
 import React from 'react';
 import './shopDetailed.css';
-import {get,request} from '../../../utils/request';
+import {get} from '../../../utils/request';
 
 class ShopDetailed extends React.Component {
     constructor(){
@@ -19,8 +19,6 @@ class ShopDetailed extends React.Component {
             if(getData.flag){
                 this.setState({
                     datalist:getData.data[0]
-                },()=>{
-                    console.log(this.state.datalist)
                 })
             }
         })

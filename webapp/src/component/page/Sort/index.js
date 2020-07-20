@@ -19,7 +19,7 @@ class Sort extends React.Component {
         return (
             <div className='sort'>
                 <Switch>
-                    <Route path="/sort/goodsList/:id" component={GoodsList} exact></Route>
+                    <Route path="/goodsList/:id" component={GoodsList} exact></Route>
                 </Switch>
                 <div>
                     <div className='search_input'>

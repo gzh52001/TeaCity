@@ -1,7 +1,6 @@
 const express = require('express');
 
 const query = require('../../mysql');
-const { response } = require('express');
 
 const router = express.Router();
 

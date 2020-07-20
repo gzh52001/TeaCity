@@ -1,6 +1,8 @@
  .mine{
     height: 745px;
+    overflow-y: auto;
 }
+
 .mine .person-info{
     height: 22%;
     background-image: linear-gradient(-90deg, #f5f7ff 0%, #fff5f0 100%), linear-gradient( #212429, #212429);

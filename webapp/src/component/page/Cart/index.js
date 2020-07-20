@@ -1,5 +1,6 @@
 import React from 'react';
 // import HeaderBar from '../../HeaderBar';
+import {withLogin} from '../../../utils/hoc';
 import './cart.css';
 
 class Cart extends React.Component {
@@ -118,4 +119,5 @@ class Cart extends React.Component {
     }
 }
 
+Cart = withLogin(Cart);
 export default Cart;

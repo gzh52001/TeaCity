@@ -1,15 +1,47 @@
 import React,{Component}from 'react';
-import { List } from 'antd-mobile';
+import { List,Modal } from 'antd-mobile';
+import {withLogin} from '../../../utils/hoc';
 import './mine.css'
 const Item = List.Item;
 class Mine extends Component{
     constructor(){
         super()
         this.state = {
-            data:""
+            data:"",
+            username:'',
+            exitFlag: false
         }
+        this.alert = Modal.alert;
     }
+
+    componentDidMount(){
+        let userinf = localStorage.getItem('tea_username');
+        this.setState({
+            username:userinf
+        })
+    }
+
+    showAlert = () => {
+        const alertInstance = this.alert('退出', '你确定要退出吗？', [
+          { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
+          { text: '退出', onPress: () =>  this.setState({exitFlag:true},this.exit()) },
+        ]);
+        setTimeout(() => {
+          // 可以调用close方法以在外部close
+          console.log('auto close');
+          alertInstance.close();
+        }, 500000);
+      };
+
+    exit = ()=>{
+        localStorage.removeItem('tea_username');
+        localStorage.removeItem('tea_token');
+        localStorage.removeItem('tea_userId');
+        this.props.history.push('/login');
+    }
+
     render(){
+        const {username} = this.state;
         return (
             <div>
                 <div className='mine'>
@@ -17,7 +49,7 @@ class Mine extends Component{
                     <div className='person-info_top'>
                         <img alt='' prop='' src='./img/head_img.png'/>
                         <div className='nfo_top_con'>
-                            <h3>1871***9595</h3>
+                            <h3>{username}</h3>
                             <b>
                                 <span><i></i></span>
                             </b>
@@ -87,15 +119,15 @@ class Mine extends Component{
                     </li>
                     <li>
                         <img alt='' prop='' src='./img/ic_me_dfkdd.png'/>
-                        <h4>待付款</h4>
+                        <h4>待发货</h4>
                     </li>
                     <li>
                         <img alt='' prop='' src='./img/ic_me_dfkdd.png'/>
-                        <h4>待付款</h4>
+                        <h4>待收货</h4>
                     </li>
                     <li>
                         <img alt='' prop='' src='./img/ic_me_dfkdd.png'/>
-                        <h4>待付款</h4>
+                        <h4>待评价</h4>
                     </li>
                 </ul>
                 <List style={{marginTop:10}} className='managements'>
@@ -120,12 +152,12 @@ class Mine extends Component{
                         onClick={() => { }}
                     >修改密码</Item>
                 </List>
-                <div className="btn">退出登录</div>
+                <div className="btn" onClick={this.showAlert}>退出登录</div>
             </div>
             </div>
         )
     }
 }
 
-
+Mine = withLogin(Mine);
 export default Mine;

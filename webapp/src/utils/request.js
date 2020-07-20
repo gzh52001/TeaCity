@@ -4,7 +4,7 @@ export async function request(url,data={},options={}){
     if(options.method){
         options.method = options.method.toLowerCase();
     }
-    if(options.method === "get" || options.get === undefined){
+    if(options.method === "get"){
         let params = [];
         for(let key in data){
            params.push(`${key}=${data[key]}`);
@@ -12,14 +12,15 @@ export async function request(url,data={},options={}){
         url = url + (url.includes('?') ? '&' : '?') + params.join('&');
     }else if(['post','put','patch'].includes(options.method)){
         data = JSON.stringify(data);
-        options.headers['content-type'] = 'application/json';
+        options.body = data;
+        console.log(data);
+        // options.headers['content-type'] = 'application/json';
     }
     return await fetch(url,{
         ...options,
-        data
-        // headers:{
-        //     'content-type':'application/json'
-        // }
+        headers:{
+            'content-type':'application/json'
+        }
     }).then(res=>res.json());
 }
 
