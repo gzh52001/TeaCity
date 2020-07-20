@@ -50,8 +50,9 @@ class Login extends Component{
         )
     }
 }
-Login = connect((state)=>({
-
-}),(dispatch)=>bindActionCreators(userActions,dispatch))(Login)
+Login = connect((state)=>{
+    console.log(state)
+    return state
+},(dispatch)=>bindActionCreators(userActions,dispatch))(Login)
 
 export default Login;

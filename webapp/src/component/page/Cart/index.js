@@ -1,7 +1,9 @@
 import React from 'react';
 // import HeaderBar from '../../HeaderBar';
 import './cart.css';
-
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux';
+import cartActions from './../../../store/actions/cart'
 class Cart extends React.Component {
     constructor(){
         super();
@@ -39,6 +41,7 @@ class Cart extends React.Component {
         this.setVal();
     }
     render() {
+        console.log(this.props)
         return (
             <div className="AC_cart">
                 <div className="AC_cartScr">
@@ -117,5 +120,7 @@ class Cart extends React.Component {
         )
     }
 }
-
+Cart = connect((state)=>({
+    state:state
+}),(dispatch)=>bindActionCreators(cartActions,dispatch))(Cart)
 export default Cart;

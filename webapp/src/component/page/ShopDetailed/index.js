@@ -1,16 +1,23 @@
 import React from 'react';
 import './shopDetailed.css';
 import {get,request} from '../../../utils/request';
-
+import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux';
+import detailActions from './../../../store/actions/detail';
+import { change } from '../../../store/actions/cart';
+import {Toast} from 'antd-mobile'
+Toast.info('This is a toast tips !!!')
 class ShopDetailed extends React.Component {
     constructor(){
         super();
         this.state = {
             id:0,
-            datalist:[]
+            datalist:[],
+            qty: 1
         }
     }
     componentDidMount() {
+        // console.log(this.props)
         let id = this.props.match.params.id;
         this.setState({
             id:id
@@ -25,7 +32,54 @@ class ShopDetailed extends React.Component {
             }
         })
     }
+
+    changeQty=(e)=>{
+        const {changeQty}=this.props
+        let qty = parseInt(e.target.value);
+        this.setState({
+            qty: qty?qty:""
+        })
+        changeQty(qty)
+    }
+    changeBlurQty = (e)=>{
+        let qty = parseInt(e.target.value);
+        const {addQty}=this.props
+        this.setState({
+            qty: qty<101?qty:
+            qty>100?
+            ((qty=100)=>{
+                Toast.info('存库不足', 1)
+                return qty
+            })():
+            1
+        })
+        addQty(qty?qty:1)
+    }
+    add=()=>{
+        let qty = this.state.qty
+        // console.log(qty)
+        const {addQty}=this.props
+        this.setState({
+            qty: qty<100?qty + 1:
+            ((qty=this.state.qty)=>{
+                console.log(qty)
+                Toast.info('存库不足', 1)
+                return qty
+            })()
+        })
+        addQty(qty<100?qty+1:100)
+    }
+    rd=()=>{
+        let qty = this.state.qty
+        const {rdQty}=this.props
+        this.setState({
+            qty: qty>2?qty - 1:1
+        })
+        rdQty(qty>2?qty-1:1)
+    }
     render() {
+        // console.log(this.props)
+        // console.log(this.state)
         return (
             <div className="AC_shopDe">
                 <div className="AC_shopDe-scr">
@@ -68,9 +122,9 @@ class ShopDetailed extends React.Component {
                                 <p>数量</p>
                             </aside>
                             <article>
-                                <input type="button" value="-"></input>
-                                <input type="text" defaultValue="1"></input>
-                                <input type="button" value="+"></input>
+                                <input onClick={this.rd} type="button" value="-" ></input>
+                                <input onBlur={this.changeBlurQty} onChange={this.changeQty} type="text" value={this.state.qty}></input>
+                                <input onClick={this.add} type="button" value="+"></input>
                             </article>
                         </div>
                         <div className="AC_shopDe_buyBar">
@@ -95,5 +149,7 @@ class ShopDetailed extends React.Component {
         )
     }
 }
-
+ShopDetailed = connect(({detail:{qty}})=>({
+    qty: qty
+}),(dispatch)=>bindActionCreators(detailActions,dispatch))(ShopDetailed)
 export default ShopDetailed;

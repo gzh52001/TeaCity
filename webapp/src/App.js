@@ -49,15 +49,15 @@ class App extends Component {
     this.props.history.go(-1)
   }     
   render() {
-    let path = this.props.location.pathname
+    let path = this.props.location.pathname.split("/")[1]
     return (
       <div className='app'>
         {
-          path==='/home'?'':
+          path==='home'?'':
           <div className='header_margin'>
             <header>
                 <a onClick={this.goto}><i className={"iconfont icon-zuojiantou"}></i>返回</a>
-                <span>{path==="/sort"?"商品分类":path==="/goodslist"?"商品列表":path==="/cart"?"购物车":path==="/mine"?"个人中心":path==="/login"?"登录/注册":"商品详情"}</span>
+                <span>{path==="sort"?"商品分类":path===`goodsList`?"商品列表":path==="cart"?"购物车":path==="mine"?"个人中心":path==="login"?"登录/注册":"商品详情"}</span>
             </header>
           </div>
         }
@@ -66,7 +66,7 @@ class App extends Component {
           <Route path="/sort" component={Sort} exact></Route>
           <Route path="/cart" component={Cart} exact></Route>
           <Route path="/mine" component={Mine} exact></Route>
-          <Route path="/sort/goodsList/:id" component={GoodsList} exact></Route>
+          <Route path="/goodsList/:id" component={GoodsList} exact></Route>
           <Route path="/login" component={Login} exact></Route>
           <Route path='/notfound' component={NotFound} exact></Route>
           <Route path="/goods/:id" component={ShopDetailed} exact></Route>
@@ -74,7 +74,7 @@ class App extends Component {
           <Redirect to='/notfound'></Redirect>
         </Switch>
         {
-        path==='/login'?'':
+        path==='login'?'':
         <div className="navbar">
           <ul>
             <li>

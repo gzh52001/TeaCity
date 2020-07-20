@@ -13,7 +13,7 @@ import GoodsList from '../GoodsList';
 
 class Sort extends React.Component {
     goto = (id) => {
-        this.props.history.push('/sort/goodsList/'+id)
+        this.props.history.push('/goodsList/'+id)
     }
     render() {
         return (
