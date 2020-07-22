@@ -132,10 +132,71 @@ router.get('/find',async (req,res)=>{
     res.send(inf);
 })
 
+// 查询所有购物车订单
+router.get('/find2',async (req,res)=>{
+    let inf = {};
+    try{
+        let sql = `select * from cart `;
+        let p = await query(sql);
+        if(p.length){
+            inf = {
+                code:200,
+                flag:true,
+                message:'查询成功',
+                data:p
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'查询失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            flag:false,
+            message:err
+        }
+    }
+    res.send(inf);
+})
+
+// 查询指定用户的购物车订单
+router.get('/findone',async (req,res)=>{
+    let {userId} = req.query;
+    let inf = {};
+    try{
+        let sql = `select * from cart where userId = ${userId}`;
+        let p = await query(sql);
+        if(p.length){
+            inf = {
+                code:200,
+                flag:true,
+                message:'查询成功',
+                data:p
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'查询失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            flag:false,
+            message:err
+        }
+    }
+    res.send(inf);
+})
+
 
 // 删除某个用户的订单 ！！！！（需提供userId和goodsId,且只需要这两个）！！！！
 router.delete('/del',async (req,res)=>{
-    let {userId,goodsId} = req.body;
+    let {userId,goodsId} = req.query;
     let inf = {};
     try{
         let sql = `delete from cart where userId=${userId} and goodsId=${goodsId}`;
@@ -151,6 +212,37 @@ router.delete('/del',async (req,res)=>{
                 code:400,
                 flag:false,
                 message:'删除失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            flag:false,
+            message:err
+        }
+    }
+    res.send(inf);
+})
+
+// 通过用户ID或者用户名称查询对应的购物车订单
+router.get('/getlikedata',async (req,res)=>{
+    let {mes} = req.query;
+    let inf = {};
+    try{
+        let sql = `select * from cart where userId like '%${mes}%' or username like '%${mes}%'`;
+        let p = await query(sql);
+        if(p.length){
+            inf = {
+                code:200,
+                flag:true,
+                message:'查询成功',
+                data:p
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'查询失败'
             }
         }
     }catch(err){

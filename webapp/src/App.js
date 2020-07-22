@@ -12,6 +12,7 @@ import Cart from './component/page/Cart';
 import Mine from './component/page/Mine';
 import NotFound from './component/page/NotFound';
 import ShopDetailed from './component/page/ShopDetailed';
+import Address from './component/page/Address';
 // import NavBar from './component/NavBar';
 
 // @withRouter
@@ -66,6 +67,7 @@ class App extends Component {
           <Route path="/sort" component={Sort} exact></Route>
           <Route path="/cart" component={Cart} exact></Route>
           <Route path="/mine" component={Mine} exact></Route>
+          <Route path="/mine/address" component={Address} exact></Route>
           <Route path="/goodsList/:id" component={GoodsList} exact></Route>
           <Route path="/login" component={Login} exact></Route>
           <Route path='/notfound' component={NotFound} exact></Route>

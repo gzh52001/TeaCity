@@ -1,6 +1,7 @@
 const express = require('express');
 
 const query = require('../../mysql');
+const { response } = require('express');
 
 const router = express.Router();
 
@@ -110,15 +111,15 @@ router.get('/findbreed', async (req, res) => {
 
 // 新增商品 (PS:此接口已对teatitlecontentId进行处理，直接输入对应的茶的品种名称即可)
 router.get('/addgoods', async (req, res) => {
-    let { teatitlecontentId, goodstitle, goodsImg, goodsDesc, goodsPrice, goodsPerson, goodsLogo } = req.query;
+    let { teatitlecontentId, goodstitle, goodsImg, goodsDesc, goodsPrice, goodsPerson, goodsLogo, goodsBigImg } = req.query;
     let inf = {};
     try {
         if (isNaN(teatitlecontentId)) {
-            let checkBreedSql = `select titlecontentId from teatitlecontent where titlecontent='${teatitlecontentId}'`;
+            let checkBreedSql = `select titlecontentId from teatitlecontent where text='${teatitlecontentId}'`;
             let checkp = await query(checkBreedSql);
             teatitlecontentId = checkp[0].titlecontentId;
         }
-        let sql = `insert into teadetailed (teatitlecontentId,goodstitle,goodsImg,goodsDesc,goodsPrice,goodsPerson,goodsLogo) value(${teatitlecontentId},'${goodstitle}','${goodsImg}','${goodsDesc}',${goodsPrice},${goodsPerson},'${goodsLogo}')`;
+        let sql = `insert into teadetailed (teatitlecontentId,goodstitle,goodsImg,goodsDesc,goodsPrice,goodsPerson,goodsLogo,goodsBigImg) value(${teatitlecontentId},'${goodstitle}','${goodsImg}','${goodsDesc}',${goodsPrice},${goodsPerson},'${goodsLogo}',${goodsBigImg})`;
         let p = await query(sql);
         if (p.affectedRows) {
             inf = {
@@ -489,4 +490,101 @@ router.get('/goodsdetailById',async (req,res)=>{
     res.send(inf);
 })
 
+// 查询一部分的数据
+router.get('/getsomegoods',async (req,res)=>{
+    let {state,count} = req.query;
+    let inf = {};
+    try{
+        if(!state){
+            state = 0;
+        }
+        let sql = `select * from teadetailed limit ${state},${count}`;
+        let p = await query(sql);
+        if(p.length){
+            inf = {
+                code:200,
+                flag:true,
+                message:'查询成功',
+                data:p
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'查询失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            flag:false,
+            message:err
+        }
+    }
+
+    res.send(inf);
+})
+
+// 通过商品ID或者名称查找对应的商品（模糊查询）
+router.get('/getlikegoods',async (req,res)=>{
+    let {mes} = req.query;
+    let inf = {};
+    try{
+        let sql = `select * from teadetailed where goodsId like '%${mes}%' or goodstitle like '%${mes}%'`;
+        let p = await query(sql);
+        if(p.length){
+            inf = {
+                code:200,
+                flag:true,
+                message:'查询成功',
+                data:p
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'查询失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            flag:false,
+            message:err
+        }
+    }
+
+    res.send(inf);
+})
+
+// 通过二级分类查找对应的ID
+router.get('/gettitlecon',async (req,res)=>{
+    let {text} = req.query;
+    let inf = {};
+    try{
+        let sql = `select titlecontentId from teatitlecontent where text = '${text}'`;
+        let p = await query(sql);
+        if(p.length){
+            inf = {
+                code:200,
+                flag:true,
+                message:'查询成功',
+                data:p
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'查询失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            flag:false,
+            message:err
+        }
+    }
+    res.send(inf);
+})
 module.exports = router;

@@ -86,6 +86,19 @@ function reducer(state = initState, action) {
         case 'del_Goods':
             return {
                 ...state,
+                cartlistdemo: []
+                //     let cartList = state.cartlistdemo;
+                //     console.log(cartList)
+                //     for (var g = 0; g < cartList.length; g++){
+                //         for(var i = 0; i<action.goods_ids.length; i++){
+                //             if(action.goods_ids[i] != cartList[g].goodsId){
+                //                 cartList.push(cartList[g])
+                //             } 
+                //         }
+                //     }
+                //     console.log(cartList)
+                //     // return cartList
+                // })()
                 // cartlistdemo: (()=>{
                 //     let cartList = state.cartlistdemo;
                 //     console.log(cartList)
@@ -99,6 +112,7 @@ function reducer(state = initState, action) {
                 //     console.log(cartList)
                 //     // return cartList
                 // })()
+
             }
         // 清空商品
         case CLEAR_CART:
