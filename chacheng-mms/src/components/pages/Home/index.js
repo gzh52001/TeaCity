@@ -1,9 +1,11 @@
 import React,{Component} from 'react'
+import {withMmsLogin} from '../../../utils/hoc';
 class Home extends Component{
     constructor(){
         super()
         this.state = {}
     }
+    componentDidMount(){}
     render(){
         return(
             <div style={{width:'100%', height:'100%' ,display:'flex',justifyContent:'center',alignItems:'center', background:'url(./home_bg.jpg) no-repeat 0 0/100% 120%'}}>
@@ -13,4 +15,5 @@ class Home extends Component{
     }
 }
 
+Home = withMmsLogin(Home);
 export default Home

@@ -40,6 +40,10 @@ class Mine extends Component{
         this.props.history.push('/login');
     }
 
+    setAddress=()=>{
+        this.props.history.push('/mine/address');
+    }
+
     render(){
         const {username} = this.state;
         return (
@@ -139,7 +143,7 @@ class Mine extends Component{
                     <Item
                         thumb="./img/ic_me_dizhi.png"
                         arrow="horizontal"
-                        onClick={() => { }}
+                        onClick={this.setAddress}
                     >地址管理</Item>
                     <Item
                         thumb="./img/ic_me_bdsj.png"

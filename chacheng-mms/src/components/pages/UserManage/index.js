@@ -1,10 +1,12 @@
-import React,{Component} from 'react'
-import {Table, Button,Form,DatePicker,Input,Dialog} from 'element-react/next'
+import React, { Component } from 'react';
+import { Table, Button, Form, Input, Loading, Dialog, Message } from 'element-react/next';
+import { get } from '../../../utils/request';
+import {withMmsLogin} from '../../../utils/hoc';
 import './userManage.css'
-class UserManage extends Component{
+class UserManage extends Component {
     constructor(props) {
         super(props);
-      
+
         this.state = {
             dialogVisible3: false,
             form: {
@@ -13,116 +15,144 @@ class UserManage extends Component{
             },
             columns: [
                 {
-                    label: "序号",
-                    prop: "id",
-                    width: 70,
-                    fixed: 'left',
-                    align: 'center'
-                },{
                     label: "用户ID",
                     prop: "userId",
                     width: 160,
                     align: 'center'
-                },{
+                }, {
                     label: "姓名",
-                    prop: "name",
-                    width: 100,
+                    prop: "username",
+                    width: 200,
                     align: 'center'
-                },{
-                    label: "注册时间",
-                    prop: "date",
-                    width: 150,
-                    align: 'center'
-                },{
+                }, {
                     label: "联系方式",
-                    prop: "phone",
+                    prop: "phoneNum",
                     width: 160,
                     align: 'center'
-                },{
-                    label: "订单管理",
-                    prop: "order",
-                    width: 280,
+                }, {
+                    label: "性别",
+                    prop: "sex",
+                    width: 100,
                     align: 'center'
                 },
                 {
                     label: "地址",
                     prop: "address",
-                    width: 300
                 },
-            ],
-            data: [
                 {
-                    id: 1,
-                    userId: 1234567,
-                    name: '王小虎',
-                    date: '2016-05-02',
-                    phone: '1874549828',
-                    order: '查看订单',
-                    address: '上海市普陀区金沙江路 1518 号',
-                },{
-                    id: 1,
-                    userId: 1234567,
-                    name: '王小虎',
-                    date: '2016-05-02',
-                    phone: '1874549828',
-                    order: '查看订单',
-                    address: '上海市普陀区金沙江路 1518 号',
+                    label: '年龄',
+                    prop: 'age',
+                    align: 'center',
+                    width: 150
                 }
-            ]
+            ],
+            data: []
         }
     }
-        
+
+    async componentDidMount() {
+        let getData = await get('/user/finduser');
+        getData.data.map(item => {
+            if (item.sex === 1) {
+                item.sex = '男'
+            } else if (item.sex === 2) {
+                item.sex = '女'
+            }
+        })
+        this.setState({
+            data: getData.data
+        })
+    }
 
     onSubmit(e) {
         e.preventDefault();
-        
+
         console.log('submit!');
     }
-    handleReset = (e)=> {
+    handleReset = (e) => {
         e.preventDefault();
         this.setState({
             form: {}
         })
     }
-      
+
     onChange(key, value) {
         this.setState({
             form: Object.assign(this.state.form, { [key]: value })
         });
     }
 
+    findUser = async () => {
+        const { form: { value } } = this.state;
+        let getSome = await get('/user/findsomeuser', { mes: value });
+        if(getSome.flag){
+            Message.success(getSome.message);
+            this.setState({
+                data: getSome.data
+            })
+        }else {
+            Message.error(getSome.message);
+        }
         
+    }
+
+    // addUser = () => {
+    //     this.setState({
+    //         dialogVisible3: true
+    //     })
+    // }
+
+
+
     render() {
         return (
-        <div className='userManage'>
-             <Form inline={true} model={this.state.form} onSubmit={this.onSubmit.bind(this)} className="demo-form-inline">
-                <Form.Item>
-                    <Input value={this.state.form.value} placeholder="请输入用户ID/姓名" onChange={this.onChange.bind(this, 'value')}></Input>
-                </Form.Item>
-                <Form.Item prop="date1" labelWidth="0px">
-                    <DatePicker
-                    value={this.state.form.date1}
-                    placeholder="选择日期"
-                    onChange={this.onChange.bind(this, 'date1')}
-                    />
-                </Form.Item>
-                <Form.Item>
-                    <Button nativeType="submit" type="primary">查询</Button>
-                    <Button onClick={this.handleReset.bind(this)}>重置</Button>
-                </Form.Item>
-            </Form>
-            <Table
-                style={{width: '100%'}}
-                columns={this.state.columns}
-                data={this.state.data}
-                border={true}
-                maxHeight={560}
-            />
-        </div>
+            <div className='userManage el-loading-demo'>
+                <Form inline={true} model={this.state.form} onSubmit={this.onSubmit.bind(this)} className="demo-form-inline">
+                    <Form.Item>
+                        <Input value={this.state.form.value} placeholder="请输入用户ID/姓名" onChange={this.onChange.bind(this, 'value')}></Input>
+                    </Form.Item>
+                    <Form.Item>
+                        <Button nativeType="submit" type="primary" onClick={this.findUser}>查询</Button>
+                        <Button onClick={this.handleReset.bind(this)}>重置</Button>
+                        {/* <Button type="success" style={{ marginLeft: 500 }} onClick={this.addUser}>新增用户</Button> */}
+                    </Form.Item>
+                </Form>
+                {/* <Loading text="拼命加载中"> */}
+                <Table
+                    style={{ width: '100%' }}
+                    columns={this.state.columns}
+                    data={this.state.data}
+                    border={true}
+                    maxHeight={560}
+                    emptyText='暂无数据'
+                />
+                {/* </Loading> */}
+
+
+                {/* <Dialog
+                    title="新增用户" 
+                    visible={this.state.dialogVisible3}
+                    onCancel={() => this.setState({ dialogVisible3: false })}
+                >
+                    <Dialog.Body>
+                        <Form model={this.state.form}>
+                            <Form.Item label="用户名" labelWidth="120">
+                                <Input value={this.state.form.name}></Input>
+                            </Form.Item>
+                        </Form>
+                    </Dialog.Body>
+
+                    <Dialog.Footer className="dialog-footer">
+                        <Button onClick={() => this.setState({ dialogVisible3: false })}>取 消</Button>
+                        <Button type="primary" onClick={() => this.setState({ dialogVisible3: false })}>确 定</Button>
+                    </Dialog.Footer>
+                </Dialog> */}
+            </div>
 
         )
     }
-      
+
 }
 
+UserManage = withMmsLogin(UserManage);
 export default UserManage

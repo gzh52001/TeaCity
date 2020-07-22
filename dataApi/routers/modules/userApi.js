@@ -264,4 +264,35 @@ router.get('/finduser',async (req,res)=>{
 
     res.send(inf);
 })
+
+// 通过ID或用户名查找对应的用户信息（含模糊查询）
+router.get('/findsomeuser',async (req,res)=>{
+    let {mes} = req.query;
+    let inf = {};
+    try{
+        let sql = `select * from userinfo where userId like '%${mes}%' or username like '%${mes}%'`;
+        let p = await query(sql);
+        if(p.length){
+            inf = {
+                code:200,
+                flag:true,
+                message:'查询成功',
+                data:p
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'查询失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            flag:false,
+            message:err
+        }
+    }
+    res.send(inf);
+})
 module.exports = router;

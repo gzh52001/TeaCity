@@ -14,28 +14,76 @@ class GoodsList extends Component {
         this.state = {
             data: "",
             dataList: [],
-            id: 0
+            id: 0,
+            priceFlag: false,
+            personFlag: false
         }
     }
-    TabFn = (obj, a) => {
-        console.log(obj)
-        console.log(a)
+    TabFn = async (obj, a) => {
+        const { title } = obj;
+        const { id, personFlag, priceFlag } = this.state;
+        if (title === '价格') {
+            if (priceFlag) {
+                let getDescData = await get('/goods/priceasc', { teatitlecontentId: id });
+                if (getDescData.flag) {
+                    this.setState({
+                        dataList: getDescData.data,
+                        priceFlag: !priceFlag
+                    })
+                }
+
+            } else {
+                let getAscData = await get('/goods/pricedesc', { teatitlecontentId: id });
+                if (getAscData.flag) {
+                    this.setState({
+                        dataList: getAscData.data,
+                        priceFlag: !priceFlag
+                    })
+                }
+
+            }
+
+        } else if (title === '新品') {
+            this.defaultData();
+        } else if (title === '销量') {
+            if (personFlag) {
+                let getDescData = await get('/goods/personasc', { teatitlecontentId: id });
+                if (getDescData) {
+                    this.setState({
+                        dataList: getDescData.data,
+                        personFlag: !personFlag
+                    })
+                }
+            }else {
+                let getAscData = await get('/goods/persondesc', { teatitlecontentId: id });
+                if (getAscData) {
+                    this.setState({
+                        dataList: getAscData.data,
+                        personFlag: !personFlag
+                    })
+                }
+            }
+        }
+    }
+
+    async defaultData() {
+        const datalist = await get('/goods/goodsbyId', { teatitlecontentId: this.state.id });
+        if (datalist.flag) {
+            this.setState({
+                dataList: datalist.data
+            })
+        }
     }
     componentDidMount() {
         this.setState({
             id: this.props.match.params.id
-        }, async () => {
-            const datalist = await get('/goods/goodsbyId', { teatitlecontentId: this.state.id });
-            if(datalist.flag){
-                this.setState({
-                    dataList: datalist.data
-                })
-            }
+        }, () => {
+            this.defaultData();
         })
     }
 
-    goto = (id)=>{
-        this.props.history.push('/goods/'+id)
+    goto = (id) => {
+        this.props.history.push('/goods/' + id)
     }
     render() {
         const { dataList } = this.state;
@@ -54,7 +102,7 @@ class GoodsList extends Component {
                         useOnPan={false}>
                         <ul className='gdsListBox' >
                             {dataList.map((item) => (
-                                <li key={item.goodsId} onClick={this.goto.bind(null,item.goodsId)}>
+                                <li key={item.goodsId} onClick={this.goto.bind(null, item.goodsId)}>
                                     <img src={item.goodsImg} alt="" />
                                     <h4>{item.goodstitle}</h4>
                                     <p>{item.goodsDesc}</p>
