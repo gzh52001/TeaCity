@@ -13,7 +13,6 @@ export async function request(url,data={},options={}){
     }else if(['post','put','patch'].includes(options.method)){
         data = JSON.stringify(data);
         options.body = data;
-        console.log(data);
         // options.headers['content-type'] = 'application/json';
     }
     return await fetch(url,{

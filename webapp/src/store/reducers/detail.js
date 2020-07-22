@@ -1,6 +1,9 @@
 
 // 初始状态
 const initState = {
+    goodsInfo:{
+
+    },
     qty: 1
 }
 
@@ -22,6 +25,10 @@ function reducer(state = initState, action) {
         case 'change_detail_qty':
             return {
                 qty: action.qty
+            }
+        case 'add_goodsInfo':
+            return {
+                goodsInfo: action.goodsInfo
             }
         default:
             return state;

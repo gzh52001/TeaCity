@@ -2,25 +2,23 @@ import React, { Component } from 'react';
 import { Tabs, WhiteSpace } from 'antd-mobile';
 import { get } from '../../../utils/request';
 import './goodsList.css'
-//测试
+
 const arr = [];
 for (let i = 0; i < 10; i++) {
     arr.push(i);
 }
 
+let goodsInfo = {}
 class GoodsList extends Component {
     constructor() {
         super()
         this.state = {
             data: "",
             dataList: [],
-            id: 0
+            id: 0,
         }
     }
-    TabFn = (obj, a) => {
-        console.log(obj)
-        console.log(a)
-    }
+
     componentDidMount() {
         this.setState({
             id: this.props.match.params.id
@@ -33,7 +31,6 @@ class GoodsList extends Component {
             }
         })
     }
-
     goto = (id)=>{
         this.props.history.push('/goods/'+id)
     }
@@ -73,5 +70,6 @@ class GoodsList extends Component {
         )
     }
 }
+
 
 export default GoodsList;

@@ -19,7 +19,12 @@ export function changeQty(qty){
       qty
    }
 }
-
+export function addGoods(goodsInfo){
+   return {
+      type:'add_goodsInfo',
+      goodsInfo
+   }
+}
 
 
 export default{

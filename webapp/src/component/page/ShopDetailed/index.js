@@ -4,7 +4,8 @@ import {get,request} from '../../../utils/request';
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
 import detailActions from './../../../store/actions/detail';
-import { change } from '../../../store/actions/cart';
+import {getInfo} from './../../../utils/getAndSetInfo'
+// import { change } from '../../../store/actions/cart';
 import {Toast} from 'antd-mobile'
 class ShopDetailed extends React.Component {
     constructor(){
@@ -12,7 +13,8 @@ class ShopDetailed extends React.Component {
         this.state = {
             id:0,
             datalist:[],
-            qty: 1
+            qty: 1,
+            goods:{}
         }
     }
     componentDidMount() {
@@ -23,13 +25,34 @@ class ShopDetailed extends React.Component {
         },async ()=>{
             let getData = await get('/goods/goodsdetailById',{goodsId:this.state.id});
             if(getData.flag){
+                let {goodsId,goodstitle,goodsPrice,goodsBigImg} = getData.data[0]
+                let goods = {
+                    userId: getInfo("tea_userId"),
+                    username: getInfo("tea_username"),
+                    goodsId,
+                    goodstitle,
+                    goodsPrice,
+                    goodsBigImg
+                } 
                 this.setState({
-                    datalist:getData.data[0]
+                    datalist:getData.data[0],
+                    goods:goods
                 })
             }
         })
     }
-
+    addToCart = async ()=>{
+        let goodsInfo = {
+            ...this.state.goods,
+            count:this.state.qty
+        }
+        let res = await get('/cart/addcart',goodsInfo);
+        if(res.flag){
+            Toast.info('成功加入购物车', 1)
+        } else{
+            Toast.info('添加失败', 1)
+        }
+    }
     changeQty=(e)=>{
         const {changeQty}=this.props
         let qty = parseInt(e.target.value);
@@ -75,7 +98,7 @@ class ShopDetailed extends React.Component {
         rdQty(qty>2?qty-1:1)
     }
     render() {
-        // console.log(this.props)
+        console.log(this.props)
         // console.log(this.state)
         return (
             <div className="AC_shopDe">
@@ -127,16 +150,16 @@ class ShopDetailed extends React.Component {
                         <div className="AC_shopDe_buyBar">
                             <aside>
                                 <p>
-                                    <i className="iconfont icon-tubiao-"></i>
+                                    <i className="iconfont icon-wode"></i>
                                     <span>客服</span>
                                 </p>
-                                <p>
-                                    <i className="iconfont icon-gouwuchezhengpin"></i>
+                                <p onClick={()=>{this.props.history.push('/cart')}}>
+                                    <i className="iconfont icon-gouwuche"></i>
                                     <span>购物车</span>
                                 </p>
                             </aside>
                             <article>
-                                <button>加入购物车</button>
+                                <button onClick={this.addToCart}>加入购物车</button>
                                 <button>立即购买</button>
                             </article>
                         </div>

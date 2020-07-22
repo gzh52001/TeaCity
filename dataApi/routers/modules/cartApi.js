@@ -6,7 +6,7 @@ const router = express.Router();
 
 // 新增购物车 (PS：同一个用户添加同样的商品时，数量增加，不会重复添加商品)
 router.get('/addcart', async (req, res) => {
-    let { userId, username, goodsId, count, goodstitle, price } = req.query;
+    let { userId, username, goodsId, count, goodstitle, goodsPrice ,goodsBigImg} = req.query;
     let inf = {};
     let defaultCount = 0;
     try {
@@ -30,7 +30,7 @@ router.get('/addcart', async (req, res) => {
                 }
             }
         } else {
-            let sql = `insert into cart (userId,username,goodsId,count,goodstitle,price) value(${userId},'${username}',${goodsId},${count},'${goodstitle}','${price}')`;
+            let sql = `insert into cart (userId,username,goodsId,count,goodstitle,goodsPrice,goodsBigImg) value(${userId},'${username}',${goodsId},${count},'${goodstitle}','${goodsPrice}','${goodsBigImg}')`;
             let p = await query(sql);
             if (p.affectedRows) {
                 inf = {
@@ -103,9 +103,10 @@ router.put('/edit', async (req, res) => {
 
 // 查询所有购物车订单
 router.get('/find',async (req,res)=>{
+    let {userId} = req.query
     let inf = {};
     try{
-        let sql = `select * from cart`;
+        let sql = `select * from cart where userId=${userId}`;
         let p = await query(sql);
         if(p.length){
             inf = {
