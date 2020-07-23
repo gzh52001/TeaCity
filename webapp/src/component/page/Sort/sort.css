@@ -56,3 +56,7 @@
     width: 55px;
     height: 55px;
 }
+.sub-con-one{
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}

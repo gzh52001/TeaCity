@@ -74,9 +74,7 @@ router.put('/edit', async (req, res) => {
     }
     str = str.slice(0,-1);
     try{
-        console.log(11);
         let sql = `update cart set ${str} where userId=${obj.userId} and goodsId=${obj.goodsId}`;
-        console.log(sql);
         let p = await query(sql);
         if(p.affectedRows){
             inf = {
@@ -100,6 +98,84 @@ router.put('/edit', async (req, res) => {
     }
     res.send(inf);
 })
+
+// 修改购物车的某个商品的选中状态
+router.put('/inputcheck', async (req, res) => {
+    // let {checked,userId,goodsId} = req.body;
+    console.log(req.body)
+    let obj = req.body;
+    let inf = {};
+    let checked = obj.isChecked?1:0;
+    let str = '';
+    for(let key in obj){
+        if(key !== 'userId' && key !== 'goodsId'){
+            if(key === 'isChecked'){
+                str += `${key}=${obj[key]},`
+            }else {
+                str += `${key}='${obj[key]}',`;
+            }
+        }
+    }
+    console.log(checked)
+    str = str.slice(0,-1,checked);
+    try{
+        let sql = `update cart set ${str} where userId=${obj.userId} and goodsId=${obj.goodsId}`;
+        let p = await query(sql);
+        if(p.affectedRows){
+            inf = {
+                code:200,
+                flag:true,
+                message:'修改成功'
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'修改失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            flag:false,
+            message:err
+        }
+    }
+    res.send(inf);
+})
+
+// 全选修改购物车所有商品的选中状态
+// router.put('/callcheck', async (req, res) => {
+//     // let {checked,userId,goodsId} = req.body;
+//     console.log(req.body)
+//     let {callCheck,userId} = req.body;
+//     let inf = {};
+//     callCheck = callCheck?1:0;
+//     try{
+//         let sql = `update cart set isChecked =${callCheck}   where userId=${userId}`;
+//         let p = await query(sql);
+//         if(p.affectedRows){
+//             inf = {
+//                 code:200,
+//                 flag:true,
+//                 message:'修改成功'
+//             }
+//         }else {
+//             inf = {
+//                 code:400,
+//                 flag:false,
+//                 message:'修改失败'
+//             }
+//         }
+//     }catch(err){
+//         inf = {
+//             code:err.errno,
+//             flag:false,
+//             message:err
+//         }
+//     }
+//     res.send(inf);
+// })
 
 // 查询所有购物车订单
 router.get('/find',async (req,res)=>{
@@ -200,6 +276,35 @@ router.delete('/del',async (req,res)=>{
     let inf = {};
     try{
         let sql = `delete from cart where userId=${userId} and goodsId=${goodsId}`;
+        let p = await query(sql);
+        if(p.affectedRows){
+            inf = {
+                code:200,
+                flag:true,
+                message:'删除成功'
+            }
+        }else {
+            inf = {
+                code:400,
+                flag:false,
+                message:'删除失败'
+            }
+        }
+    }catch(err){
+        inf = {
+            code:err.errno,
+            flag:false,
+            message:err
+        }
+    }
+    res.send(inf);
+})
+// 删除某个用户全部订单
+router.delete('/del/all',async (req,res)=>{
+    let {userId} = req.query;
+    let inf = {};
+    try{
+        let sql = `delete from cart where userId=${userId}`;
         let p = await query(sql);
         if(p.affectedRows){
             inf = {

@@ -160,3 +160,20 @@
 .AC_shopDe_buyBar article button:nth-of-type(2){
     background-color: #ff8766;
 }
+/* 购物车图标数量显示 */
+.gowu i{
+    position: relative;
+}
+.gowu b{
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 100%;
+    font-size: 10px;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    top: -4px;
+    right: -10px;
+}

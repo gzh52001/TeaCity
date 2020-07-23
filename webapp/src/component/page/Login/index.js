@@ -63,12 +63,12 @@ class Login extends Component {
         })
     }
 
-    goMine = (loginHttp)=>{
+    goHome = (loginHttp)=>{
         const { data: { username, userId, token } } = loginHttp;
             localStorage.setItem('tea_username', username);
             localStorage.setItem('tea_userId', userId);
             localStorage.setItem('tea_token', token);
-            this.props.history.push('/mine');
+            this.props.history.push('/home');
     }
 
     register = async () => {
@@ -103,7 +103,7 @@ class Login extends Component {
         if (logUsername && logPassword) {
             let loginHttp = await get('/user/login', { username: logUsername, userpass: logPassword });
             if (loginHttp.flag) {
-                this.modalShow('登录成功',this.goMine.bind(null,loginHttp));
+                this.modalShow('登录成功',this.goHome.bind(null,loginHttp));
             } else {
                 this.modalShow('登录失败');
             }

@@ -13,6 +13,10 @@ import Mine from './component/page/Mine';
 import NotFound from './component/page/NotFound';
 import ShopDetailed from './component/page/ShopDetailed';
 import Address from './component/page/Address';
+
+import {defaultList} from './store/actions/cart'
+import { get } from './utils/request';
+// import {getInfo} from './utils/getAndSetInfo'
 // import NavBar from './component/NavBar';
 
 // @withRouter
@@ -46,6 +50,14 @@ class App extends Component {
       }
     ]
   }
+  async componentDidMount(){
+      let userId = localStorage.getItem("tea_userId")
+      let res = await get('/cart/find',{userId})
+      if(res.flag){
+          this.props.dispatch(defaultList(res.data))
+      }
+  }
+
   goto = ()=>{
     this.props.history.go(-1)
   }     
@@ -76,13 +88,17 @@ class App extends Component {
           <Redirect to='/notfound'></Redirect>
         </Switch>
         {
-        path==='login'?'':
+        path==('login'||'goods')?'':
         <div className="navbar">
           <ul>
-            <li>
+            <li className='gowu'>
               {this.state.navList.map(item=>{
                 return <NavLink key={item.path} to={item.path} activeClassName='active'>
-                  <i className={item.icon}></i>
+                  <i className={item.icon}>
+                    {
+                      item.title=='购物车'?<b>{this.props.goodsNum}</b>:''
+                    }
+                  </i>
                   <span>{item.title}</span></NavLink>
             })}
             </li>
@@ -95,19 +111,14 @@ class App extends Component {
 }
 
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = ({cart:{cartlist}})=>{
   return {
-    state: state
+    goodsNum: cartlist.length
   }
 }
 
 
 App = withRouter(App);
 App = connect(mapStateToProps)(App)
-// App = connect((state)=>({
-  
-// }),(dispatch)=>{
-//   return
-// })(App)
 
 export default App;

@@ -10,7 +10,7 @@ export function defaultList(defaultList){
    }
 }
 
-export function add(goods){
+export function addToCart(goods){
    return {
        type:ADD_TO_CART,
        goods
@@ -25,7 +25,7 @@ export function change(goodsId,count,userId){
    }
 }
 
-export function clear(){
+export function clearAll(){
    return {
        type:CLEAR_CART,
    }
@@ -44,9 +44,10 @@ export function total_Price(goods_id){
        goods_id
    }
 }
-export function checkAll(){
+export function checkAll(con){
    return {
        type:'check_All',
+       con
    }
 }
 export function checkAll2(isChecked){
@@ -66,22 +67,28 @@ export function checkOne2(){
        type:'check_one_2',
    }
 }
-export function delGoods(goods_ids=[]){
+export function delGoods(goods_id){
    return {
        type:'del_Goods',
-       goods_ids
+       goods_id
+   }
+}
+export function delBtn(){//控制计算或删除开关
+   return {
+       type:'del_Btn',
    }
 }
 export default{
-   add,
+   addToCart,
    change,
    remove,
-   clear,
+   clearAll,
    total_Price,
    defaultList,
    checkAll,
    checkAll2,
    checkOne,
    checkOne2,
-   delGoods
+   delGoods,
+   delBtn
 }
