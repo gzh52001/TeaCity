@@ -1,6 +1,7 @@
 //获取信息
 export function getInfo(value){
-    return JSON.parse(localStorage.getItem(value));
+    console.log(localStorage.getItem(value));
+    return localStorage.getItem(value);
 }
 // 存信息
 export function setInfo(value,obj){

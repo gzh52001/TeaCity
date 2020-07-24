@@ -47,6 +47,7 @@ class ShopDetailed extends React.Component {
             count:this.state.qty
         }
         let res = await get('/cart/addcart',goodsInfo);
+        console.log(res);
         if(res.flag){
             Toast.info('成功加入购物车', 1)
         } else{
