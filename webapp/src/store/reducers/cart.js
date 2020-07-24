@@ -17,22 +17,32 @@ function reducer(state = initState, action) {
                 ...state,
                 cartlist: action.defaultList,
                 totalPrice: (action.defaultList.filter(item => item.isChecked )).reduce((prev,item) => prev + item.count*item.goodsPrice,0).toFixed(2),
+                checkall: ((action.defaultList.filter(item => item.isChecked == 0)).length == state.cartlist.length)?1:0,
             }
         // 添加商品
         case ADD_TO_CART:
             // 返回一个新的State，这个state会自动覆盖store中的旧数据
             return {
                 ...state,
-                cartlist: state.cartlist.filter(item=>item.goodsId == action.goods.goodsId).length?state.cartlist:[action.goods, ...state.cartlist]
+                cartlist: 
+                        state.cartlist.filter(item=>item.goodsId == action.goods.goodsId).length?
+                        state.cartlist.map(item=>{
+                            if(item.goodsId == action.goods.goodsId){
+                                item.count = item.count + action.goods.count
+                            }
+                            return item
+                        }):
+                        [action.goods, ...state.cartlist]
             }
-
+    
         // 删除商品
         case REMOVE_FROM_CART:
             return {
                 ...state,
-                cartlist: state.cartlist.filter(item => item.goods_id != action.goods_id)
+                // cartlist: state.cartlist.filter(item => item.goods_id != action.goods_id)
+                cartlist: state.cartlist.filter(item => !item.isChecked )
             }
-
+        
         // 修改数量
         case CHANGE_QTY:
             
@@ -51,19 +61,17 @@ function reducer(state = initState, action) {
             }
         //父复选框控制子复选框
         case 'check_All':
-            // let obj={
-            //     userId:localStorage.getItem('tea_userId'),
-            //     allCheck: !state.checkall
-            // }
-            // console.log(obj)
-
-            // put('/cart/callcheck',obj)
-
             return {
                 ...state,
                 checkall: action.con?false:!state.checkall
             }
         case 'check_All_2':
+            let obj={
+                userId:state.cartlist[0].userId,
+                callCheck:action.isChecked
+            }
+            put('/cart/callcheck',obj)
+            // console.log(action.isChecked)
             return {
                 ...state,
                 cartlist: state.cartlist.map(item =>{
@@ -102,7 +110,8 @@ function reducer(state = initState, action) {
         case 'del_Goods':
             return {
                 ...state,
-                cartlist: state.cartlist.filter(item =>item.goodsId!=action.goods_id),
+                cartlist: state.cartlist.filter(item => !item.isChecked ),
+                // cartlist: state.cartlist.filter(item =>item.goodsId!=action.goods_id),
                 totalPrice: '0.00',
                 step: 0,
             }

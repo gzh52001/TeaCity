@@ -52,8 +52,7 @@ class ShopDetailed extends React.Component {
         let res = await get('/cart/addcart',goodsInfo);
         if(res.flag){
             Toast.info('成功加入购物车', 1)
-            this.props.addCart(goodsInfo)
-                
+            this.props.addCart(goodsInfo) 
         } else{
             Toast.info('添加失败', 1)
         }

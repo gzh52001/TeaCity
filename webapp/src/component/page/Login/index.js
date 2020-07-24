@@ -62,7 +62,6 @@ class Login extends Component {
             fn && fn();
         })
     }
-
     goHome = (loginHttp)=>{
         const { data: { username, userId, token } } = loginHttp;
             localStorage.setItem('tea_username', username);

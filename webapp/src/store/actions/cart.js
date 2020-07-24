@@ -1,7 +1,5 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
-export const CLEAR_CART = 'CLEAR_CART';
 export const CHANGE_QTY = 'CHANGE_QTY';
-export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
 export function defaultList(defaultList){
    return {
@@ -22,19 +20,6 @@ export function change(goodsId,count,userId){
        goodsId,
        count,
        userId
-   }
-}
-
-export function clearAll(){
-   return {
-       type:CLEAR_CART,
-   }
-}
-
-export function remove(goods_id){
-   return {
-       type:REMOVE_FROM_CART,
-       goods_id
    }
 }
 
@@ -81,8 +66,6 @@ export function delBtn(){//控制计算或删除开关
 export default{
    addToCart,
    change,
-   remove,
-   clearAll,
    total_Price,
    defaultList,
    checkAll,

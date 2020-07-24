@@ -10,50 +10,26 @@ import {getInfo} from './../../../utils/getAndSetInfo'
 import {Toast} from 'antd-mobile'
 
 class Cart extends React.Component {
-    //选择复选框时把已选的id放进一个数组中，方便后边对id应删除
-    idArr = []
-    addId=(goodsId,e)=>{
-        if(e.target.checked==true){
-            this.idArr.push(goodsId)
-        }else{
-            this.idArr = this.idArr.filter(item=>item!=goodsId)
-        }
-    }
-    
     //结算或编辑删除
     delOrSettlement = async ()=>{
-        let {delGoods,clearAll,checkAll,checkOne,cart:{checkall}} = this.props
+        let {delGoods,checkAll,cart:{checkall}} = this.props
         if(this.props.cart.delbtn){//开关为真
             console.log('结算')
         }else{
-            if(this.idArr.length){//选择删除
-                for(let i =0; i<this.idArr.length; i++){
-                    let obj = {
-                        userId:getInfo("tea_userId"),
-                        goodsId:this.idArr[i]
-                    }
-                    let res = await request.del('/cart/del',obj)
-                    if(res.flag){
-                        delGoods(this.idArr[i])
-                    } else {
-                        console.log("删除失败")
-                    }
-                    
-                 }
-                 this.idArr = []
-            } else if(checkall)  {//全算删除
-                let userId = getInfo("tea_userId")
-                let res = await request.del('/cart/del/all',{userId})
-                if(res.flag){
-                    clearAll()
-                    checkAll('all')
-                } else{
-                    console.log("删除失败")
-                }
-                
+            let obj = {
+                userId:getInfo("tea_userId"),
             }
+            let res = await request.del('/cart/selectdel',obj)
+            if(res.flag){
+                Toast.info('删除成功！', 1)
+            } else{
+                Toast.info('删除失败！', 1)
+            }
+            delGoods()
+            checkall?checkAll('all'):''
         }
     }
+    
     componentDidMount(){
     
     }
@@ -88,7 +64,7 @@ class Cart extends React.Component {
     }
     render() {
         let {change,delBtn,cart:{cartlist,delbtn}} = this.props
-        // console.log(this.props)
+        // console.log(cartlist)
         return (
             <div className="AC_cart">
                 <div className="AC_cartScr">
@@ -98,11 +74,10 @@ class Cart extends React.Component {
                         <span onClick={delBtn}>{delbtn?'编辑':'完成'}</span>
                         </div>
                         {cartlist.map((item,index)=>(
-                            <div className="AC_cart_goods" key={item.cartId}>
+                            <div className="AC_cart_goods" key={item.goodsId}>
                                 <div className="AC_cart_oneGoods">
                                     <div className="AC_cart_input">
-                                       {/* <input className='checkedDom' onClick={this.checkedFn.bind(null,item.goodsId)} type="checkbox"></input> */}
-                                        <input className='checkedDom' onClick={this.addId.bind(null,item.goodsId)} onChange={this.checkOneFn.bind(null,item.goodsId,item.userId)} checked={item.isChecked}  type="checkbox"></input>
+                                        <input  className='checkedDom' onChange={this.checkOneFn.bind(null,item.goodsId,item.userId)} checked={item.isChecked||''}  type="checkbox"></input>
                                     </div>
                                     <div className="AC_cart_imgBox">
                                         <img alt='' src={item.goodsBigImg}></img>
