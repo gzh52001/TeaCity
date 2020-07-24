@@ -168,8 +168,14 @@ class ShopDetailed extends React.Component {
                                 <button onClick={this.addToCart}>加入购物车</button>
                                 <button>立即购买</button>
                             </article>
+                            
                         </div>
                     </div>
+                    
+                </div>
+                <div className='iconshoye' onClick={()=>{this.props.history.push('/home')}}>
+                    回首页
+                    <i className=' iconfont icon-shouye'></i>
                 </div>
             </div>
         )

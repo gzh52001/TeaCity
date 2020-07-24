@@ -87,6 +87,13 @@ class UserManage extends Component {
         let getSome = await get('/user/findsomeuser', { mes: value });
         if(getSome.flag){
             Message.success(getSome.message);
+            getSome.data.map(item => {
+                if (item.sex === 1) {
+                    item.sex = '男'
+                } else if (item.sex === 2) {
+                    item.sex = '女'
+                }
+            })
             this.setState({
                 data: getSome.data
             })

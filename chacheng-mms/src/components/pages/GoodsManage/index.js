@@ -84,7 +84,7 @@ class GoodsManage extends Component {
                                     size="small"
                                     onClick={this.edit.bind(null,row)}
                                 >编辑
-                            </Button>
+                                </Button>
                                 <Button type="danger" size="small" onClick={this.remove.bind(this,row)}>移除</Button>
                             </span>)
                     }

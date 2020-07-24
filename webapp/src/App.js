@@ -16,8 +16,6 @@ import Address from './component/page/Address';
 
 import {defaultList} from './store/actions/cart'
 import { get } from './utils/request';
-// import {getInfo} from './utils/getAndSetInfo'
-// import NavBar from './component/NavBar';
 
 // @withRouter
 // @connect(mapStateToProps)
