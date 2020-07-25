@@ -76,7 +76,7 @@ class App extends Component {
         <header>
           <h4>茶城后台管理系统</h4>
           <div className='state'>
-            <img src='./logo.jpg' alt='' />
+            <img src='./img/logo.jpg' alt='' />
             <Dropdown onCommand={this.handleCommand.bind(this)} menu={(
               <Dropdown.Menu>
                 <Dropdown.Item command='exit'>退出登录</Dropdown.Item>

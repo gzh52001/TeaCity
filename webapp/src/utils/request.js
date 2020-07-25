@@ -4,7 +4,7 @@ export async function request(url,data={},options={}){
     if(options.method){
         options.method = options.method.toLowerCase();
     }
-    if(options.method === "get"){
+    if(options.method === "get"||options.method === "delete"){
         let params = [];
         for(let key in data){
            params.push(`${key}=${data[key]}`);

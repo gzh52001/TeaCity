@@ -67,7 +67,7 @@ class Login extends Component {
       
     render() {
         return (
-            <div className="AC_login" style={{ background: 'url(./img1.jpg) no-repeat', width: '100vw', height: '100vh', position: 'fixed', top: 0, left: 0, backgroundSize: '100% 100%',display:'flex',justifyContent:'center',alignItems:'center' }}>
+            <div className="AC_login" style={{ background: 'url(./img/img1.jpg) no-repeat', width: '100vw', height: '100vh', position: 'fixed', top: 0, left: 0, backgroundSize: '100% 100%',display:'flex',justifyContent:'center',alignItems:'center' }}>
                 <Form ref="form" model={this.state.form} rules={this.state.rules} labelWidth="120" className="demo-ruleForm" style={{background:'rgba(255,255,255,0.6)',width:500,borderRadius:10,height:300,paddingTop: 40}}>
                     <h2 style={{fontFamily:'幼圆',fontWeight:'bold',fontSize:20,marginBottom:20,textAlign:'center'}}>欢迎登录醉品茶城管理系统</h2>
 

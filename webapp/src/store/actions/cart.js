@@ -1,7 +1,5 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
-export const CLEAR_CART = 'CLEAR_CART';
 export const CHANGE_QTY = 'CHANGE_QTY';
-export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
 export function defaultList(defaultList){
    return {
@@ -10,7 +8,7 @@ export function defaultList(defaultList){
    }
 }
 
-export function add(goods){
+export function addToCart(goods){
    return {
        type:ADD_TO_CART,
        goods
@@ -25,28 +23,16 @@ export function change(goodsId,count,userId){
    }
 }
 
-export function clear(){
-   return {
-       type:CLEAR_CART,
-   }
-}
-
-export function remove(goods_id){
-   return {
-       type:REMOVE_FROM_CART,
-       goods_id
-   }
-}
-
 export function total_Price(goods_id){
    return {
        type:'total_Price',
        goods_id
    }
 }
-export function checkAll(){
+export function checkAll(con){
    return {
        type:'check_All',
+       con
    }
 }
 export function checkAll2(isChecked){
@@ -66,22 +52,26 @@ export function checkOne2(){
        type:'check_one_2',
    }
 }
-export function delGoods(goods_ids=[]){
+export function delGoods(goods_id){
    return {
        type:'del_Goods',
-       goods_ids
+       goods_id
+   }
+}
+export function delBtn(){//控制计算或删除开关
+   return {
+       type:'del_Btn',
    }
 }
 export default{
-   add,
+   addToCart,
    change,
-   remove,
-   clear,
    total_Price,
    defaultList,
    checkAll,
    checkAll2,
    checkOne,
    checkOne2,
-   delGoods
+   delGoods,
+   delBtn
 }

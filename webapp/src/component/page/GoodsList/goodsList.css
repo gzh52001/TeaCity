@@ -65,5 +65,6 @@
     font-size: 14px;
     text-align: center;
     color: #b6b6b6;
-    margin-top: 10px;
+    height: 40px;
+    line-height: 40px;
 }

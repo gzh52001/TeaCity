@@ -26,9 +26,15 @@ export function addGoods(goodsInfo){
    }
 }
 
-
+export function addCart(goods){
+   return {
+       type:"ADD_TO_CART",
+       goods
+   }
+}
 export default{
    addQty,
    rdQty,
-   changeQty
+   changeQty,
+   addCart
 }
