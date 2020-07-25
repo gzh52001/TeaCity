@@ -1,5 +1,5 @@
 // import {createStore,applyMiddleware,compose} from 'redux';
-import {createStore,applyMiddleware} from 'redux';
+import {createStore} from 'redux';
 
 // 引入浏览器插件的中间件
 // import {composeWithDevTools} from 'redux-devtools-extension';

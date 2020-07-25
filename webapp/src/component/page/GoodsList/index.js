@@ -8,7 +8,6 @@ for (let i = 0; i < 10; i++) {
     arr.push(i);
 }
 
-let goodsInfo = {}
 class GoodsList extends Component {
     constructor() {
         super()

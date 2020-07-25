@@ -36,7 +36,7 @@ class Sort extends React.Component {
                                     {
                                         item.content.map((v, i) => {
                                             return <li className="sub-con-one" key={v.titleId} onClick={this.goto.bind(null, v.titleId)}>
-                                                <img src={v.icon}></img>
+                                                <img src={v.icon} alt=""></img>
                                                 <p>{v.text}</p>
                                             </li>
                                         })

@@ -35,10 +35,10 @@ class Cart extends React.Component {
         }
     }
     addId=(goodsId,e)=>{
-        if(e.target.checked==true){
+        if(e.target.checked===true){
             this.idArr.push(goodsId)
         }else{
-            this.idArr = this.idArr.filter(item=>item!=goodsId)
+            this.idArr = this.idArr.filter(item=>item!==goodsId)
         }
         console.log(this.idArr)
     }

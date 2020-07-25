@@ -1,6 +1,6 @@
 import React from 'react';
 import './shopDetailed.css';
-import {get,request} from '../../../utils/request';
+import {get} from '../../../utils/request';
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
 import detailActions from './../../../store/actions/detail';
