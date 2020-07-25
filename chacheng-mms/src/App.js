@@ -1,22 +1,31 @@
-import React, { Component } from 'react';
+import React, { Component,lazy,Suspense } from 'react';
 import './App.css';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import { Dropdown,Message,MessageBox } from 'element-react/next';
+import { Layout } from 'element-react/next'
+
+// const Home = lazy(()=>import('./components/pages/Home'));
+// const Login = lazy(()=>import('./components/pages/Login'));
+// const Reg = lazy(()=>import('./components/pages/Reg'));
+// const UserManage = lazy(()=>import('./components/pages/UserManage'));
+// const GoodsManage = lazy(()=>import('./components/pages/GoodsManage'));
+// const OrderManage = lazy(()=>import('./components/pages/OrderManage'));
+// const MenuTab = lazy(()=>import('./components/MenuTab'));
 import Home from './components/pages/Home'
 import Login from './components/pages/Login'
 import Reg from './components/pages/Reg'
 import UserManage from './components/pages/UserManage'
-import GoodsManage from './components/pages/GoodsManage'
+// import GoodsManage from './components/pages/GoodsManage'
 import OrderManage from './components/pages/OrderManage'
 import MenuTab from './components/MenuTab'
-import { Layout } from 'element-react/next'
+
 
 class App extends Component {
   constructor(props) {
     super()
     this.props = props
     this.state = {
-      storage: ''
+      storage: '',
     }
   }
 
@@ -67,7 +76,7 @@ class App extends Component {
         <header>
           <h4>茶城后台管理系统</h4>
           <div className='state'>
-            <img src='./logo.jpg' alt='' />
+            <img src='./img/logo.jpg' alt='' />
             <Dropdown onCommand={this.handleCommand.bind(this)} menu={(
               <Dropdown.Menu>
                 <Dropdown.Item command='exit'>退出登录</Dropdown.Item>
@@ -83,17 +92,20 @@ class App extends Component {
           <Layout.Col span='3'>
             <MenuTab props={this.props} />
           </Layout.Col>
+          {/* <Suspense fallback={<div>loading......</div>}> */}
           <Layout.Col span='21'>
-            <Switch>
-              <Route path='/home' component={Home} />
-              <Route path='/login' component={Login} />
-              <Route path='/reg' component={Reg} />
-              <Route path='/userManage' component={UserManage} />
-              <Route path='/goodsManage' component={GoodsManage} />
-              <Route path='/orderManage' component={OrderManage} />
-              <Redirect from='/' to='/home' exact />
-            </Switch>
+              <Switch>
+                <Route path='/home' component={Home} />
+                <Route path='/login' component={Login} />
+                <Route path='/reg' component={Reg} />
+                <Route path='/userManage' component={UserManage} />
+                {/* <Route path='/goodsManage' component={GoodsManage} /> */}
+                <Route path='/orderManage' component={OrderManage} />
+                <Redirect from='/' to='/home' exact />
+              </Switch>
+        
           </Layout.Col>
+          {/* </Suspense> */}
         </Layout.Row>
       </div>
     )

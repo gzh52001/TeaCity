@@ -48,7 +48,7 @@ class OrderManage extends Component {
                     align: 'center'
                 }, {
                     label: "总价",
-                    prop: "price",
+                    prop: "goodsPrice",
                     width: 90,
                     align: 'center'
                 },
@@ -73,7 +73,8 @@ class OrderManage extends Component {
     }
 
     async getDataFn(){
-        let getData = await get('/cart/find');
+        let getData = await get('/cart/find2');
+        console.log(getData);
         if (getData.flag) {
             this.setState({
                 data: getData.data
