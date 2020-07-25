@@ -1,10 +1,10 @@
-const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:10086' : '';
+const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:10086' : 'http://120.79.19.106:10086';
 export async function request(url,data={},options={}){
     url = baseUrl + url;
     if(options.method){
         options.method = options.method.toLowerCase();
     }
-    if(options.method === "get"){
+    if(options.method === "get"||options.method === "delete"){
         let params = [];
         for(let key in data){
            params.push(`${key}=${data[key]}`);

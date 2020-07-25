@@ -4,6 +4,7 @@ import {get} from '../../../utils/request';
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
 import detailActions from './../../../store/actions/detail';
+// import {addToCart} from './../../../store/actions/cart'
 import {getInfo} from './../../../utils/getAndSetInfo'
 // import { change } from '../../../store/actions/cart';
 import {Toast} from 'antd-mobile'
@@ -18,7 +19,7 @@ class ShopDetailed extends React.Component {
         }
     }
     componentDidMount() {
-        // console.log(this.props)
+        console.log(this.props)
         let id = this.props.match.params.id;
         this.setState({
             id:id
@@ -42,16 +43,26 @@ class ShopDetailed extends React.Component {
         })
     }
     addToCart = async ()=>{
-        let goodsInfo = {
-            ...this.state.goods,
-            count:this.state.qty
-        }
-        let res = await get('/cart/addcart',goodsInfo);
-        if(res.flag){
-            Toast.info('成功加入购物车', 1)
+        // console.log('123')
+        if(getInfo("tea_userId")){
+            let goodsInfo = {
+                ...this.state.goods,
+                count:this.state.qty
+            }
+            let res = await get('/cart/addcart',goodsInfo);
+            console.log(res);
+            if(res.flag){
+                Toast.info('成功加入购物车', 1)
+                this.props.addCart(goodsInfo) 
+            } else{
+                Toast.info('添加失败', 1)
+            }
         } else{
-            Toast.info('添加失败', 1)
+            this.props.history.push('/login')
+            Toast.info('请先登录哦!', 1)
         }
+        
+
     }
     changeQty=(e)=>{
         const {changeQty}=this.props
@@ -98,8 +109,7 @@ class ShopDetailed extends React.Component {
         rdQty(qty>2?qty-1:1)
     }
     render() {
-        console.log(this.props)
-        // console.log(this.state)
+        // console.log(this.props)
         return (
             <div className="AC_shopDe">
                 <div className="AC_shopDe-scr">
@@ -119,7 +129,7 @@ class ShopDetailed extends React.Component {
                             </aside>
                             <article>
                                 <div>
-                                    <p>直降</p><span>已优惠0元（10折）</span>
+                                    <p>直降</p><span>已优惠3元</span>
                                 </div>
                                 <div>
                                     <p>包邮</p><span>全场在线支付满59元免运费</span>
@@ -153,8 +163,10 @@ class ShopDetailed extends React.Component {
                                     <i className="iconfont icon-wode"></i>
                                     <span>客服</span>
                                 </p>
-                                <p onClick={()=>{this.props.history.push('/cart')}}>
-                                    <i className="iconfont icon-gouwuche"></i>
+                                <p className="gowu" onClick={()=>{this.props.history.push('/cart')}}>
+                                    <i className="iconfont icon-gouwuche">
+                                        <b>{this.props.goodsNum}</b>
+                                    </i>
                                     <span>购物车</span>
                                 </p>
                             </aside>
@@ -162,14 +174,21 @@ class ShopDetailed extends React.Component {
                                 <button onClick={this.addToCart}>加入购物车</button>
                                 <button>立即购买</button>
                             </article>
+                            
                         </div>
                     </div>
+                    
+                </div>
+                <div className='iconshoye' onClick={()=>{this.props.history.push('/home')}}>
+                    回首页
+                    <i className=' iconfont icon-shouye'></i>
                 </div>
             </div>
         )
     }
 }
-ShopDetailed = connect(({detail:{qty}})=>({
-    qty: qty
+ShopDetailed = connect((state)=>({
+    qty: state.detail.qty,
+    goodsNum: state.cart.cartlist.length
 }),(dispatch)=>bindActionCreators(detailActions,dispatch))(ShopDetailed)
 export default ShopDetailed;

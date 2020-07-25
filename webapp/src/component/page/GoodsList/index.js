@@ -68,6 +68,7 @@ class GoodsList extends Component {
 
     async defaultData() {
         const datalist = await get('/goods/goodsbyId', { teatitlecontentId: this.state.id });
+        console.log(datalist)
         if (datalist.flag) {
             this.setState({
                 dataList: datalist.data

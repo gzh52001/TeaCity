@@ -114,7 +114,6 @@ class Mine extends Component{
                 <Item
                         thumb="./img/ic_me_dingdan.png"
                         arrow="horizontal"
-                        onClick={() => { }}
                     >我的订单<span style={{position: "absolute",right:'12%',color:"#B1B1B1"}}>全部订单</span></Item>
                 <ul className='orders-list'>
                     <li>
@@ -138,7 +137,6 @@ class Mine extends Component{
                     <Item
                         thumb="./img/ic_me_tequan.png"
                         arrow="horizontal"
-                        onClick={() => { }}
                     >我的特权<span style={{position: "absolute",right:'12%',color:"#B1B1B1"}}>九品&nbsp;&nbsp;会员</span></Item>
                     <Item
                         thumb="./img/ic_me_dizhi.png"
@@ -148,12 +146,10 @@ class Mine extends Component{
                     <Item
                         thumb="./img/ic_me_bdsj.png"
                         arrow="horizontal"
-                        onClick={() => { }}
                     >绑定手机</Item>
                     <Item
                         thumb="./img/ic_me_xgmm.png"
                         arrow="horizontal"
-                        onClick={() => { }}
                     >修改密码</Item>
                 </List>
                 <div className="btn" onClick={this.showAlert}>退出登录</div>

@@ -1,15 +1,9 @@
 import React from 'react';
-// import { Grid } from 'antd-mobile';
 import FenleiList from './../../../../public/data/fenlei.json'
-// import {get,request} from '../../../utils/request';
 import './sort.css';
 import { Switch, Route } from 'react-router-dom';
 import GoodsList from '../GoodsList';
-// console.log(FenleiList)
-// function fn(obj,idx){
-//     console.log(obj)
-//     console.log(idx)
-// }
+
 
 class Sort extends React.Component {
     goto = (id) => {
@@ -32,7 +26,7 @@ class Sort extends React.Component {
                             <div key={item.title}>
                                 <div className="sub-title">{item.title}</div>
 
-                                <div className="sub-content">
+                                <div className="sub-content" style={{backgroundColor: "#fff"}}>
                                     {
                                         item.content.map((v, i) => {
                                             return <li className="sub-con-one" key={v.titleId} onClick={this.goto.bind(null, v.titleId)}>

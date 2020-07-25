@@ -4,7 +4,6 @@ import { HashRouter, BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import 'element-theme-default';//样式包
-import * as serviceWorker from './serviceWorker';
 const Router = process.env.NODE_ENV === 'production' ? BrowserRouter : HashRouter;
 
 ReactDOM.render(
@@ -15,4 +14,3 @@ ReactDOM.render(
 );
 
 
-serviceWorker.unregister();

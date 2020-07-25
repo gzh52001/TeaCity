@@ -7,7 +7,3 @@ export function setInfo(value,obj){
     localStorage.setItem(value,JSON.stringify(obj));
 }
 
-// export default {
-//     getInfo,
-//     setInfo
-// }
