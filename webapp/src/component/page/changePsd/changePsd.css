@@ -1,0 +1,26 @@
+.AC_psd{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.AC_psd_title{
+    font-size: 20px;
+    font-family: '幼圆';
+    margin-bottom: 10px;
+}
+.AC_psd input{
+    height: 35px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-indent: 2em;
+    font-size: 16px;
+}
+.AC_psd button{
+    height: 35px;
+    background-color: #58bc58;
+    font-size: 18px;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+}

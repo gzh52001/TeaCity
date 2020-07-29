@@ -44,6 +44,14 @@ class Mine extends Component{
         this.props.history.push('/mine/address');
     }
 
+    setPhone=()=>{
+        this.props.history.push('/mine/phone');
+    }
+
+    setPsd=()=>{
+        this.props.history.push('/mine/changepsd');
+    }
+
     render(){
         const {username} = this.state;
         return (
@@ -146,10 +154,12 @@ class Mine extends Component{
                     <Item
                         thumb="./img/ic_me_bdsj.png"
                         arrow="horizontal"
+                        onClick={this.setPhone}
                     >绑定手机</Item>
                     <Item
                         thumb="./img/ic_me_xgmm.png"
                         arrow="horizontal"
+                        onClick={this.setPsd}
                     >修改密码</Item>
                 </List>
                 <div className="btn" onClick={this.showAlert}>退出登录</div>

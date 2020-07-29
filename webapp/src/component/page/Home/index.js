@@ -8,22 +8,14 @@ class Home extends React.Component {
         super();
         this.props = props
         this.state = {
-            newsData: []
+            newsData: [],
+            hours:0,
+            minutes:0,
+            seconds:0
         }
     }
 
     async componentDidMount() {
-        // let xml = new XMLHttpRequest();
-        // xml.open('get','./data/index.json',true);
-        // xml.onreadystatechange = function(){
-        //     if(xml.readyState == 4 && xml.status == 200){
-        //         let res = xml.responseText;
-        //        res = JSON.parse(res);
-        //        console.log(res);
-        //     }
-        // }
-        // xml.send();
-        
         let getNewsData = await fetch('./data/index.json').then(res => {
             return res.json();
         }).then(res => {
@@ -33,11 +25,42 @@ class Home extends React.Component {
         this.setState({
             newsData: getNewsData
         })
+
+        this.time();
+    }
+
+    b0(str){
+        if(str<10){
+            return '0'+str
+        }
+        return str;
+    }
+
+    time(){
+        let d1 = new Date();
+        let d2 = new Date();
+        d2.setDate(d1.getDate()+1);
+        d2.setHours(0);
+        d2.setMinutes(0);
+        d2.setSeconds(0);
+        setInterval(()=>{
+            let d3 = new Date();
+            let a = d2.getTime()-d3.getTime();
+            let h = this.b0(parseInt(a%(24*60*60*1000)/(60*60*1000)));
+            let m = this.b0(parseInt(a%(60*60*1000)/(60*1000)));
+            let s = this.b0(parseInt(a%(60*1000)/1000));
+            this.setState({
+                hours:h,
+                minutes:m,
+                seconds:s
+            })
+        },1000)
+
     }
 
 
     render() {
-        const { newsData } = this.state;
+        const { newsData,hours,minutes,seconds } = this.state;
         // console.log(newsData)
         return (
             <div>
@@ -101,11 +124,11 @@ class Home extends React.Component {
                                     </div>
                                     <div className="AC_home_timesNow">
                                         <p>距结束</p>
-                                        <span>01</span>
+                                        <span>{hours}</span>
                                         <em>:</em>
-                                        <span>01</span>
+                                        <span>{minutes}</span>
                                         <em>:</em>
-                                        <span>01</span>
+                                        <span>{seconds}</span>
                                     </div>
                                 </div>
                                 <div className="AC_home_timesContent">
@@ -177,14 +200,37 @@ class Home extends React.Component {
                                     </article>
                                 </div>
                                 <div className="AC_home_topContent">
-                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/1.jpg"></img>
-                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/2.jpg"></img>
-                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/3.jpg"></img>
-                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/4.jpg"></img>
-                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/4.jpg"></img>
-                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/6.jpg"></img>
-                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/7.jpg"></img>
-                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/8.jpg"></img>
+                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/1.jpg" onClick={()=>{
+                                        this.props.history.push('/goodsList/2345001')
+                                    }}></img>
+                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/2.jpg"
+                                    onClick={()=>{
+                                        this.props.history.push('/goodsList/2346001')
+                                    }}></img>
+                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/3.jpg"
+                                    onClick={()=>{
+                                        this.props.history.push('/goodsList/2347002')
+                                    }}></img>
+                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/4.jpg"
+                                    onClick={()=>{
+                                        this.props.history.push('/goodsList/2347001')
+                                    }}></img>
+                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/5.jpg"
+                                    onClick={()=>{
+                                        this.props.history.push('/goodsList/2348001')
+                                    }}></img>
+                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/6.jpg"
+                                    onClick={()=>{
+                                        this.props.history.push('/goodsList/2349001')
+                                    }}></img>
+                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/7.jpg"
+                                    onClick={()=>{
+                                        this.props.history.push('/goodsList/2346003')
+                                    }}></img>
+                                    <img alt='' src="https://img1.zuipin.cn/new-wap/WAP%E5%85%AB%E5%A4%A7%E7%83%AD%E9%94%80/20200113/8.jpg"
+                                    onClick={()=>{
+                                        this.props.history.push('/goodsList/2352001')
+                                    }}></img>
                                 </div>
                             </div>
 

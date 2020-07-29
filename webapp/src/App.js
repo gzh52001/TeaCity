@@ -13,9 +13,12 @@ import Mine from './component/page/Mine';
 import NotFound from './component/page/NotFound';
 import ShopDetailed from './component/page/ShopDetailed';
 import Address from './component/page/Address';
-
+import Phone from './component/page/Phone';
+import ChangePsd from './component/page/changePsd';
 import { defaultList } from './store/actions/cart'
 import { get } from './utils/request';
+
+
 
 // @withRouter
 // @connect(mapStateToProps)
@@ -81,6 +84,8 @@ class App extends Component {
           <Route path="/cart" component={Cart} exact></Route>
           <Route path="/mine" component={Mine} exact></Route>
           <Route path="/mine/address" component={Address} exact></Route>
+          <Route path="/mine/phone" component={Phone} exact></Route>
+          <Route path="/mine/changepsd" component={ChangePsd} exact></Route>
           <Route path="/goodsList/:id" component={GoodsList} exact></Route>
           <Route path="/login" component={Login} exact></Route>
           <Route path='/notfound' component={NotFound} exact></Route>
